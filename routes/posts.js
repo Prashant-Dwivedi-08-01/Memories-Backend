@@ -1,5 +1,5 @@
 import express from 'express'
-import {getPost, getPosts, createPost, updatePost, deletePost, likePost,commentPost, getPostsBySearch} from "../controllers/posts.js"
+import {getPost, getPosts, getPostByUserId, createPost, updatePost, deletePost, likePost,commentPost, getPostsBySearch} from "../controllers/posts.js"
 
 import auth from '../middleware/auth.js';
 
@@ -9,6 +9,7 @@ const router = express.Router();
 router.get('/search', getPostsBySearch);
 router.get('/', getPosts);
 router.get('/:id', getPost);
+router.get('/user/:userId', getPostByUserId);
 
 
 router.post("/", auth, createPost);

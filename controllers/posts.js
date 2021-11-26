@@ -54,6 +54,22 @@ export const getPostsBySearch = async (req, res) =>{
     }
 }
 
+export const getPostByUserId = async (req, res) => {
+    const { userId } = req.params;
+    try {
+        const postsByUserId = await PostMessage.find({ creator: userId })
+
+        res.status(200).json({
+            data: postsByUserId,
+            message:'Success'
+        })
+        
+    } catch (error) {
+        res.status(500).json({ message: "Something Went Wrong Server Side" });
+    }
+
+}
+
 export const createPost = async (req,res)=>{
     const post = req.body;
     const  newPost = new PostMessage({...post, creator: req.userId, createdAt: new Date().toISOString() });
